@@ -3,8 +3,9 @@ import express from 'express'
 import axios from 'axios'
 import cron from 'node-cron'
 import { TwitterApi } from 'twitter-api-v2'
-import { Client, auth } from 'twitter-api-sdk'
+
 import 'dotenv/config'
+import { URL_API_GET_SPY_PRICE } from './utils/consts'
 const app = express()
 
 const port = process.env.PORT || 8080
@@ -41,24 +42,23 @@ const client = new TwitterApi({
   accessSecret: process.env.ACCESS_SECRET
 })
 
-const bearer = new TwitterApi(process.env.BEARER_TOKEN)
+//const bearer = new TwitterApi(process.env.BEARER_TOKEN)
 
 const twitterClient = client.readWrite
 
 const getSPYvalue = async () => {
-  const { data } = await axios.get(
-    'https://iol.invertironline.com/Titulo/GraficoIntradiario?idTitulo=110178&idTipo=2&idMercado=1'
-  )
+  const { data } = await axios.get(URL_API_GET_SPY_PRICE)
   return moneyParse(data[data.length - 1].Ultima)
 }
 
-const initialValue = await getSPYvalue()
+let oldValue = await getSPYvalue()
 
-console.log(initialValue)
 const createTweet = async () => {
   const value = await getSPYvalue()
-  console.log(value != initialValue)
-  if (value != initialValue) await twitterClient.v2.tweet(`El valor del cedear syp500 es de ${value}`)
+  if (value != oldValue) {
+    await twitterClient.v2.tweet(generateTextTweetForAscOrDescPrice(value, oldValue))
+    oldValue = value
+  }
 }
 
 cron.schedule('*/30 11-17 * * *', async () => {
