@@ -61,8 +61,8 @@ const createTweet = async () => {
   if (value != initialValue) await twitterClient.v2.tweet(`El valor del cedear syp500 es de ${value}`)
 }
 
-cron.schedule('*/10 * * * *', () => {
-  createTweet()
+cron.schedule('*/30 11-17 * * *', async () => {
+  await createTweet()
 })
 
 app.get('/api/v1/twetts', async (_req, res) => {
