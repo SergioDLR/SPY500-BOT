@@ -7,10 +7,10 @@ import { Client, auth } from 'twitter-api-sdk'
 import 'dotenv/config'
 const app = express()
 
-const port = 8080
+const port = process.env.PORT || 8080
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`App ready on ${port}`)
 })
 
 const moneyParse = (money, currency = 'ARP') => {
