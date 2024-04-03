@@ -49,7 +49,7 @@ const getSPYvalue = async () => {
   const { data } = await axios.get(
     'https://iol.invertironline.com/Titulo/GraficoIntradiario?idTitulo=110178&idTipo=2&idMercado=1'
   )
-  return moneyParse(data[0].Ultima)
+  return moneyParse(data[data.length - 1].Ultima)
 }
 
 const initialValue = await getSPYvalue()
