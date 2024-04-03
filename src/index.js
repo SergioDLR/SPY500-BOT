@@ -5,7 +5,8 @@ import cron from 'node-cron'
 import { TwitterApi } from 'twitter-api-v2'
 
 import 'dotenv/config'
-import { URL_API_GET_SPY_PRICE } from './utils/consts'
+import { URL_API_GET_SPY_PRICE } from './utils/consts.js'
+import { generateTextTweetForAscOrDescPrice } from './utils/misc.js'
 const app = express()
 
 const port = process.env.PORT || 8080
@@ -25,9 +26,7 @@ const moneyParse = (money, currency = 'ARP') => {
 
 app.get('/api/v1/syp', async (_req, res) => {
   try {
-    const { data } = await axios.get(
-      'https://iol.invertironline.com/Titulo/GraficoIntradiario?idTitulo=110178&idTipo=2&idMercado=1'
-    )
+    const { data } = await axios.get(URL_API_GET_SPY_PRICE)
 
     res.send(moneyParse(data[0].Ultima))
   } catch {
