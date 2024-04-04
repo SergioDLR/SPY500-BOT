@@ -28,10 +28,15 @@ app.get('/api/v1/syp', async (_req, res) => {
 })
 
 const createTweet = async () => {
-  const value = await getSPYvalue()
-  if (value != oldValue) {
-    await twitterClient.v2.tweet(generateTextTweetForAscOrDescPrice(value, oldValue))
-    oldValue = value
+  //TODO: agregar caso en donde valide que no le llegue undefined desde la consulta.
+  try {
+    const value = await getSPYvalue()
+    if (value != oldValue) {
+      await twitterClient.v2.tweet(generateTextTweetForAscOrDescPrice(value, oldValue))
+      oldValue = value
+    }
+  } catch (e) {
+    console.log(e)
   }
 }
 

@@ -8,5 +8,6 @@ export const getSPYvalue = async () => {
     return moneyParse(data[data.length - 1].Ultima)
   } catch (e) {
     console.log(e)
+    throw new Error('No hay precio disponible')
   }
 }
