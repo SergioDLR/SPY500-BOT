@@ -4,7 +4,7 @@ import cron from 'node-cron'
 import 'dotenv/config'
 import { CRON_TIME_SCHEDULE } from './utils/consts.js'
 import { generateTextTweetForAscOrDescPrice } from './utils/misc.js'
-import { moneyParse } from './utils/parser.js'
+
 import { getSPYvalue } from './services/spyServices.js'
 import { twitterClient } from './services/twitterConnect.js'
 
@@ -13,7 +13,8 @@ const app = express()
 const port = process.env.PORT || 8080
 
 let oldValue = await getSPYvalue()
-
+//TODO: puede fallar si se inicia fuera de horario de mercado, no hay precio.
+//TODO: integrar con db.
 app.listen(port, () => {
   console.log(`App ready on ${port}`)
 })
@@ -21,7 +22,7 @@ app.listen(port, () => {
 app.get('/api/v1/syp', async (_req, res) => {
   try {
     const value = await getSPYvalue()
-    res.send(moneyParse(value))
+    res.send(value)
   } catch {
     res.send('error fetching data')
   }
