@@ -27,13 +27,16 @@ app.get('/api/v1/syp', async (_req, res) => {
   }
 })
 
-//TODO: ADD try catch!
-
 const createTweet = async () => {
-  const value = await getSPYvalue()
-  if (value != oldValue) {
-    await twitterClient.v2.tweet(generateTextTweetForAscOrDescPrice(value, oldValue))
-    oldValue = value
+  //TODO: agregar caso en donde valide que no le llegue undefined desde la consulta.
+  try {
+    const value = await getSPYvalue()
+    if (value != oldValue) {
+      await twitterClient.v2.tweet(generateTextTweetForAscOrDescPrice(value, oldValue))
+      oldValue = value
+    }
+  } catch (e) {
+    console.log(e)
   }
 }
 
@@ -44,6 +47,7 @@ cron.schedule(CRON_TIME_SCHEDULE, async () => {
 app.get('/api/v1/twetts', async (_req, res) => {
   try {
     await createTweet()
+    //TODO: modificar para devolver un dto. Ademas de devolver el precio la hora y porcentaje de modificacion.
     res.send('created')
   } catch (e) {
     console.log(e)
