@@ -27,8 +27,6 @@ app.get('/api/v1/syp', async (_req, res) => {
   }
 })
 
-//TODO: ADD try catch!
-
 const createTweet = async () => {
   const value = await getSPYvalue()
   if (value != oldValue) {
@@ -44,6 +42,7 @@ cron.schedule(CRON_TIME_SCHEDULE, async () => {
 app.get('/api/v1/twetts', async (_req, res) => {
   try {
     await createTweet()
+    //TODO: modificar para devolver un dto. Ademas de devolver el precio la hora y porcentaje de modificacion.
     res.send('created')
   } catch (e) {
     console.log(e)
