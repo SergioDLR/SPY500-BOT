@@ -28,7 +28,6 @@ app.get('/api/v1/syp', async (_req, res) => {
 })
 
 const createTweet = async () => {
-  //TODO: agregar caso en donde valide que no le llegue undefined desde la consulta.
   try {
     const value = await getSPYvalue()
     if (value != oldValue) {
