@@ -1,13 +1,24 @@
+import dayjs from 'dayjs'
+
 import SpyValuesScheme from '../Schemas/SpyValues.js'
 import { getSPYvalue } from '../services/spyServices.js'
 export const saveSpyValue = async () => {
-  return SpyValuesScheme.create({ value: await getSPYvalue() })
+  return SpyValuesScheme.create({ value: await getSPYvalue(), date: dayjs() })
 }
 
 export const getLastSpyValue = async () => {
-  return SpyValuesScheme.find().sort({ _id: -1 }).limit(1).exec()[0]
+  return SpyValuesScheme.findOne().sort({ _id: -1 }).limit(1).lean().exec()
 }
 
 export const saveNewSpyValue = async (newValue) => {
-  return SpyValuesScheme.create({ value: newValue })
+  return SpyValuesScheme.create({ value: newValue, date: dayjs() })
+}
+
+export const getFirtsSpyValue = async () => {
+  const yesterdayAt12Date = dayjs().subtract(1, 'day').startOf('day')
+  return SpyValuesScheme.findOne({ date: { $gt: yesterdayAt12Date } })
+    .sort({ _id: 1 })
+    .limit(1)
+    .lean()
+    .exec()
 }
