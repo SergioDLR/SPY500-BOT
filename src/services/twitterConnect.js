@@ -1,11 +1,14 @@
 import { TwitterApi } from 'twitter-api-v2'
-import process from 'node:process'
+
+import { enviroment } from '../utils/enviroment.js'
+
+const { appKey, appSecret, accessToken, accessSecret } = enviroment
 
 const client = new TwitterApi({
-  appKey: process.env.API_KEY,
-  appSecret: process.env.API_SECRET,
-  accessToken: process.env.ACCESS_TOKEN,
-  accessSecret: process.env.ACCESS_SECRET
+  appKey,
+  appSecret,
+  accessToken,
+  accessSecret
 })
 
 //const bearer = new TwitterApi(process.env.BEARER_TOKEN)
