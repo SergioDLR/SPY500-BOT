@@ -12,6 +12,7 @@ const __dirname = path.dirname(__filename)
 import { getLastSpyValue } from './repository/SpyValues.js'
 import nunjucks from 'nunjucks'
 import { moneyParse } from './utils/parser.js'
+import { createTweet } from './services/tweetServices.js'
 
 const app = express()
 const port = enviroment.port || 8080
@@ -34,7 +35,7 @@ app.use('/api/v1/spy', SpyController)
 
 app.use('/api/v1/tweet', TweetController)
 
-app.get('/', async (req, res) => {
+app.get('/', async (_req, res) => {
   const { value } = await getLastSpyValue()
   const parsed = moneyParse(value)
   res.render('home', { value: parsed })
