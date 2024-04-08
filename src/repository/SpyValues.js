@@ -7,7 +7,7 @@ export const saveSpyValue = async () => {
 }
 
 export const getLastSpyValue = async () => {
-  return SpyValuesScheme.findOne().sort({ _id: -1 }).limit(1).lean().exec()
+  return SpyValuesScheme.findOne().sort({ date: -1 }).limit(1).lean().exec()
 }
 
 export const saveNewSpyValue = async (newValue) => {

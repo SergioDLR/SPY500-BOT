@@ -5,11 +5,12 @@ import { twitterClient } from './twitterConnect.js'
 
 export const createTweet = async () => {
   try {
-    const value = await getSPYvalue()
-    const oldValue = await getLastSpyValue()
-    if (value != oldValue) {
-      await twitterClient.v2.tweet(generateTextTweetForAscOrDescPrice(value, oldValue))
-      await saveNewSpyValue(value)
+    const lastValue = await getSPYvalue()
+    const { value } = await getLastSpyValue()
+    console.log(value, lastValue)
+    if (value != lastValue) {
+      await saveNewSpyValue(lastValue)
+      await twitterClient.v2.tweet(generateTextTweetForAscOrDescPrice(lastValue, value))
     }
   } catch (e) {
     console.log(e)
