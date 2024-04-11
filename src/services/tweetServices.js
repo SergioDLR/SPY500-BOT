@@ -7,7 +7,7 @@ export const createTweet = async () => {
   try {
     const lastValue = await getSPYvalue()
     const { value } = await getLastSpyValue()
-    console.log(value, lastValue)
+
     if (value != lastValue) {
       await saveNewSpyValue(lastValue)
       await twitterClient.v2.tweet(generateTextTweetForAscOrDescPrice(lastValue, value))
