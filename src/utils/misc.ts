@@ -1,6 +1,6 @@
-import { getFirtsSpyValue, getLastSpyValue } from '../repository/SpyValues.js'
-import { moneyParse } from './parser.js'
-export const generateTextTweetForAscOrDescPrice = (actualValue, pastValue) => {
+import { getFirtsSpyValue, getLastSpyValue } from '../repository/SpyValues'
+import { moneyParse } from './parser'
+export const generateTextTweetForAscOrDescPrice = (actualValue: number, pastValue: number) => {
   if (pastValue > actualValue) {
     return `🤒🤒🤒 El valor del cedear SPY500 baja a ${moneyParse(actualValue)} ARS`
   } else {
@@ -8,11 +8,11 @@ export const generateTextTweetForAscOrDescPrice = (actualValue, pastValue) => {
   }
 }
 
-export const getVariationSPY = async () => {
+export const getVariationSPY = async (): Promise<number> => {
   const firstValueOfDay = await getFirtsSpyValue()
   const lastValueOfDay = await getLastSpyValue()
-
-  return parseFloat(((lastValueOfDay.value - firstValueOfDay.value) / firstValueOfDay.value) * 100).toFixed(2)
+  if (lastValueOfDay === null) return 0
+  return (((lastValueOfDay.value - firstValueOfDay.value) / firstValueOfDay.value) * 100).toFixed(2)
 }
 
 export const generateDailyPorcentualForAscOrDescPrice = async () => {

@@ -1,22 +1,22 @@
 import express from 'express'
 import 'dotenv/config'
 import mongoose from 'mongoose'
-import { enviroment } from './utils/enviroment.js'
-import SpyController from './controllers/spyController.js'
-import TweetController from './controllers/tweetController.js'
-import { cronScheduler } from './services/cronServices.js'
+import { enviroment } from './utils/enviroment'
+import SpyController from './controllers/spyController'
+import TweetController from './controllers/tweetController'
+import { cronScheduler } from './services/cronServices'
 import path from 'path'
 import { fileURLToPath } from 'url'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
-import { getLastSpyValue, getSPYValuesInDates } from './repository/SpyValues.js'
+import { getLastSpyValue, getSPYValuesInDates } from './repository/SpyValues'
 import nunjucks from 'nunjucks'
-import { moneyParse } from './utils/parser.js'
-import { getVariationSPY } from './utils/misc.js'
+import { moneyParse } from './utils/parser'
+import { getVariationSPY } from './utils/misc'
 import dayjs from 'dayjs'
 
 const app = express()
-const port = enviroment.port || 8080
+const port = enviroment.port ?? 8080
 app.use(express.static('public'))
 nunjucks.configure(`${__dirname}/views`, {
   autoescape: true,
@@ -49,7 +49,7 @@ app.get('/historicos', async (_req, res) => {
 
 app.get('/historicos/withDate', async (req, res) => {
   const { dateFrom, dateTo } = req.query
-  const values = await getSPYValuesInDates(dateFrom, dateTo)
+  const values = await getSPYValuesInDates(String(dateFrom ?? ''), String(dateTo ?? ''))
 
   res.render('variationWithDates', {
     values: values.map((value) => ({

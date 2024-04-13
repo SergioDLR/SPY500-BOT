@@ -1,4 +1,4 @@
-export const moneyParse = (money, currency = 'ARP') => {
+export const moneyParse = (money: number, currency = 'ARP') => {
   const formatter = new Intl.NumberFormat('es-AR', {
     currency,
     maximumFractionDigits: 2,

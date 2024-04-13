@@ -5,5 +5,5 @@ export const enviroment = {
   accessToken: process.env.ACCESS_TOKEN,
   accessSecret: process.env.ACCESS_SECRET,
   port: process.env.PORT,
-  mongoConnectionString: process.env.MONGO_CONNECT
+  mongoConnectionString: process.env.MONGO_CONNECT ?? ''
 }
