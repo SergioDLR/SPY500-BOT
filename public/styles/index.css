@@ -18,7 +18,7 @@ h2 {
   color: white;
   padding-top: 40px;
   padding-bottom: 40px;
-  justify-content: center;
+  justify-content: space-around;
 }
 .body-main {
   display: flex;
@@ -56,4 +56,33 @@ body {
   gap: 5px;
   justify-content: center;
   flex-direction: row;
+}
+
+.links {
+  color: white;
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+}
+.links a {
+  color: white;
+
+  text-decoration: none;
+}
+.links a:hover {
+  border-bottom: 2px solid white;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 20px;
+}
+
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
 }

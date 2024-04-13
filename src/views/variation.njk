@@ -1,0 +1,14 @@
+{% extends "layout.njk" %}
+{% block content %}
+<h5>Tabla de valores historicos</h5>
+
+<form action="/historicos/withDate">
+  <label>Fecha desde</label>
+  <input type="date"  id="dateFrom" name="dateFrom"/>
+  <label>Fecha hasta</label>
+  <input type="date" id="dateTo" name="dateTo" />
+  <input type="submit"/>
+</form>
+
+{% block table %}{% endblock %}
+{% endblock %}

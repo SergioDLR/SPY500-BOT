@@ -22,3 +22,10 @@ export const getFirtsSpyValue = async () => {
     .lean()
     .exec()
 }
+
+export const getSPYValuesInDates = async (dateStart, dateEnd) => {
+  return SpyValuesScheme.find({ date: { $gt: dateStart, $lt: dateEnd } })
+    .sort({ _id: 1 })
+    .lean()
+    .exec()
+}

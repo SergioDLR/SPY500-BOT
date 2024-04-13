@@ -1,0 +1,16 @@
+{% extends "variation.njk" %}
+
+{% block table %}
+<table>
+    <tr>
+        <th>Fecha</th>
+        <th>Valor</th>
+    </tr>
+    {% for value in values %}
+        <tr>
+            <td>{{ value.date }}</td>
+            <td>{{ value.value }}</td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}
