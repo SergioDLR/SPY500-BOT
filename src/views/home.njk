@@ -1,29 +1,6 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="description" content="Spy500 cedear bot">
-  <meta name="author" content="Sergio Lopez Rey">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SPY 500</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
-   <link rel="stylesheet" href="./styles/reset.css">
-  <link rel="stylesheet" href="./styles/index.css">
-
-</head>
-<body>
-  <div class="center">
-    
-      <h1> SPY500 cedear bot</h1>
-    
-  </div>
-  <div class="body-principal">
-  <div class="body-main">
-    <div class="content">
-   
-      <h2 >Publicamos el precio del cedear spy500 diariamente</h2>
+{% extends "layout.njk" %}
+{% block content %}
+ <h2 >Publicamos el precio del cedear spy500 diariamente</h2>
       <div class="flex">
         <div class="card">
           <h4 class="text-price">{{ value }} ARS</h4>
@@ -36,11 +13,7 @@
        
       </div>
        <div class="card">
-     <a class="twitter-timeline" data-lang="es" data-height="400" data-theme="dark" href="https://twitter.com/syp500cedear?ref_src=twsrc%5Etfw">Tweets by syp500cedear</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+             <a class="twitter-timeline" data-lang="es" data-height="400" data-theme="dark" href="https://twitter.com/syp500cedear?ref_src=twsrc%5Etfw">Tweets by syp500cedear</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         </div>
-     </div>
-    </div>
-  </div>
-  </div>
-</body>
-</html>
+        </div>
+{% endblock %}
