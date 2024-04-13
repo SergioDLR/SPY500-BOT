@@ -12,11 +12,11 @@ const __dirname = path.dirname(__filename)
 import { getLastSpyValue } from './repository/SpyValues.js'
 import nunjucks from 'nunjucks'
 import { moneyParse } from './utils/parser.js'
-import { createTweet } from './services/tweetServices.js'
+import { getVariationSPY } from './utils/misc.js'
 
 const app = express()
 const port = enviroment.port || 8080
-
+app.use(express.static('public'))
 nunjucks.configure(`${__dirname}/views`, {
   autoescape: true,
   express: app
@@ -38,5 +38,6 @@ app.use('/api/v1/tweet', TweetController)
 app.get('/', async (_req, res) => {
   const { value } = await getLastSpyValue()
   const parsed = moneyParse(value)
-  res.render('home', { value: parsed })
+  const variation = await getVariationSPY()
+  res.render('home', { value: parsed, variation })
 })
