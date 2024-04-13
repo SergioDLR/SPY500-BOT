@@ -1,0 +1,19 @@
+{% extends "layout.njk" %}
+{% block content %}
+ <h2 >Publicamos el precio del cedear spy500 diariamente</h2>
+      <div class="flex">
+        <div class="card">
+          <h4 class="text-price">{{ value }} ARS</h4>
+          <h5>Ultimo precio </h5>
+        </div>
+        <div class="card">
+          <h4 class="text-price">{{ variation }} ARS</h4>
+          <h5>Variacion del dia</h5>
+        </div>
+       
+      </div>
+       <div class="card">
+             <a class="twitter-timeline" data-lang="es" data-height="400" data-theme="dark" href="https://twitter.com/syp500cedear?ref_src=twsrc%5Etfw">Tweets by syp500cedear</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </div>
+        </div>
+{% endblock %}

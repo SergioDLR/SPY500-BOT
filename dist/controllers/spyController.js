@@ -1,54 +1,43 @@
-"use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = require("express");
-const misc_1 = require("../utils/misc");
-const SpyValues_1 = require("../repository/SpyValues");
-const router = (0, express_1.Router)();
-router.get('/value', (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
+import { Router } from 'express';
+import { getVariationSPY } from '../utils/misc.js';
+import { getFirtsSpyValue, getLastSpyValue, saveSpyValue } from '../repository/SpyValues.js';
+const router = Router();
+router.get('/value', async (_req, res) => {
     try {
-        const value = yield (0, SpyValues_1.getLastSpyValue)();
+        const value = await getLastSpyValue();
         res.send(value);
     }
-    catch (_a) {
+    catch {
         res.send('error fetching data');
     }
-}));
-router.post('/value', (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
+});
+router.post('/value', async (_req, res) => {
     try {
-        yield (0, SpyValues_1.saveSpyValue)();
+        await saveSpyValue();
         return res.status(200).send('valor registrado correctamente');
     }
-    catch (_b) {
+    catch {
         return res.status(500).send('No se pudo guardar un valor nuevo');
     }
-}));
-router.get('/variation', (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
+});
+router.get('/variation', async (_req, res) => {
     try {
-        const value = yield (0, misc_1.getVariationSPY)();
+        const value = await getVariationSPY();
         return res.status(200).send(`La variacion es del ${value} %`);
     }
     catch (e) {
         console.log(e);
         return res.status(500).send('No se puede calcular la variacion del cedear');
     }
-}));
-router.get('/firstSpyToday', (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
+});
+router.get('/firstSpyToday', async (_req, res) => {
     try {
-        const value = yield (0, SpyValues_1.getFirtsSpyValue)();
+        const value = await getFirtsSpyValue();
         return res.status(200).send(value);
     }
     catch (e) {
         console.log(e);
         return res.status(500).send('No se pudo guardar un valor nuevo');
     }
-}));
-exports.default = router;
+});
+export default router;
