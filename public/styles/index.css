@@ -1,0 +1,61 @@
+html {
+  font-family: 'lato', Tahoma, Geneva, Verdana, sans-serif;
+  height: 100%;
+}
+
+h1 {
+  font-size: 28px;
+  margin-left: 200px;
+}
+h2 {
+  font-size: 18px;
+  font-weight: 600;
+}
+.center {
+  display: flex;
+  width: 100%;
+  background-color: #0c141a;
+  color: white;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+.body-main {
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  margin-top: 5px;
+  border: 2px solid #156359;
+  padding: 8px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  flex-grow: 1;
+  border-radius: 8px;
+}
+.text-price {
+  font-weight: 600;
+  font-size: 22px;
+}
+
+body {
+  height: 100%;
+}
+.body-principal {
+  color: white;
+  height: 100%;
+  min-height: 100vh;
+  background-color: #111b21;
+}
+
+.content {
+  margin-top: 20px;
+  width: 80%;
+}
+
+.flex {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  flex-direction: row;
+}
