@@ -1,6 +1,6 @@
 import { Router } from 'express'
-import { getVariationSPY } from '../utils/misc.js'
-import { getFirtsSpyValue, getLastSpyValue, saveSpyValue } from '../repository/SpyValues.js'
+import { getVariationSPY } from '../utils/misc'
+import { getFirtsSpyValue, getLastSpyValue, saveSpyValue } from '../repository/SpyValues'
 
 const router = Router()
 

@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { createTweet } from '../services/tweetServices.js'
+import { createTweet } from '../services/tweetServices'
 
 const router = Router()
 
