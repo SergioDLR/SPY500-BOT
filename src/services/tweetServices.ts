@@ -1,7 +1,7 @@
-import { getLastSpyValue, saveNewSpyValue } from '../repository/SpyValues.js'
-import { generateDailyPorcentualForAscOrDescPrice, generateTextTweetForAscOrDescPrice } from '../utils/misc.js'
-import { getSPYvalue } from './spyServices.js'
-import { twitterClient } from './twitterConnect.js'
+import { getLastSpyValue, saveNewSpyValue } from '../repository/SpyValues'
+import { generateDailyPorcentualForAscOrDescPrice, generateTextTweetForAscOrDescPrice } from '../utils/misc'
+import { getSPYvalue } from './spyServices'
+import { twitterClient } from './twitterConnect'
 
 export const createTweet = async () => {
   try {

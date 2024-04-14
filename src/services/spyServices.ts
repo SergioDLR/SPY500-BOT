@@ -1,4 +1,4 @@
-import { URL_API_GET_SPY_PRICE } from '../utils/consts.js'
+import { URL_API_GET_SPY_PRICE } from '../utils/consts'
 
 import axios from 'axios'
 
