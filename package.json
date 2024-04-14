@@ -6,14 +6,12 @@
   "type": "module",
   "scripts": {
     "dev": "npx tsx --watch   .",
-    "start": "tsc-esm && copyfiles -u 1 src/views/**/* dist && node dist/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "eslint && tsc-esm && copyfiles -u 1 src/views/**/* dist && node dist/index.js",
+    "test": "npx tsx lint"
   },
-  "author": "",
+  "author": "Sergio Lopez Rey",
   "license": "ISC",
   "dependencies": {
-    "@types/node-cron": "^3.0.11",
-    "@types/nunjucks": "^3.2.6",
     "axios": "^1.6.8",
     "copyfiles": "^2.4.1",
     "dayjs": "^1.11.10",
@@ -27,11 +25,14 @@
   },
   "devDependencies": {
     "@digitak/tsc-esm": "^3.1.4",
+    "@eslint/js": "^9.0.0",
     "@types/express": "^4.17.21",
+    "@types/node-cron": "^3.0.11",
+    "@types/nunjucks": "^3.2.6",
     "eslint": "^8.57.0",
-    "nodemon": "^3.1.0",
     "ts-node": "^10.9.2",
     "tsx": "^4.7.2",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "typescript-eslint": "^7.6.0"
   }
 }

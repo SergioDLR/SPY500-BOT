@@ -29,8 +29,15 @@ export const getSPYValuesInDates = async (
   dateStart: string,
   dateEnd: string
 ): Promise<{ value: number; date: string | Date }[]> => {
-  return await SpyValuesScheme.find({ date: { $gt: dateStart, $lt: dateEnd } })
-    .sort({ _id: 1 })
-    .lean()
-    .exec()
+  try {
+    const spyValues = await SpyValuesScheme.find({ date: { $gt: dateStart, $lt: dateEnd } })
+      .sort({ _id: 1 })
+      .lean()
+      .exec()
+
+    const parsedData = spyValues.map((spyValue) => ({ value: spyValue.value ?? 0, date: spyValue.date ?? '' }))
+    return parsedData
+  } catch {
+    return []
+  }
 }

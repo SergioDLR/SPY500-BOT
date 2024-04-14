@@ -9,11 +9,18 @@ export const generateTextTweetForAscOrDescPrice = (actualValue, pastValue) => {
     }
 };
 export const getVariationSPY = async () => {
-    const firstValueOfDay = await getFirtsSpyValue();
-    const lastValueOfDay = await getLastSpyValue();
-    if (lastValueOfDay === null)
+    try {
+        const firstValueOfDay = await getFirtsSpyValue();
+        const lastValueOfDay = await getLastSpyValue();
+        if (lastValueOfDay === null || firstValueOfDay === null)
+            return 0;
+        let parsedLastValue = Number(lastValueOfDay.value);
+        let parsedFirstValue = Number(firstValueOfDay.value);
+        return parseFloat((((parsedLastValue - parsedFirstValue) / parsedFirstValue) * 100).toFixed(2));
+    }
+    catch {
         return 0;
-    return (((lastValueOfDay.value - firstValueOfDay.value) / firstValueOfDay.value) * 100).toFixed(2);
+    }
 };
 export const generateDailyPorcentualForAscOrDescPrice = async () => {
     const variation = await getVariationSPY();

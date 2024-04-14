@@ -1,5 +1,6 @@
-import { TwitterApi } from 'twitter-api-v2'
+//@ts-nocheck
 
+import { TwitterApi } from 'twitter-api-v2'
 import { enviroment } from '../utils/enviroment'
 
 const { appKey, appSecret, accessToken, accessSecret } = enviroment

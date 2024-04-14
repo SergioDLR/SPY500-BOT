@@ -9,22 +9,34 @@ export const generateTextTweetForAscOrDescPrice = (actualValue: number, pastValu
 }
 
 export const getVariationSPY = async (): Promise<number> => {
-  const firstValueOfDay = await getFirtsSpyValue()
-  const lastValueOfDay = await getLastSpyValue()
-  if (lastValueOfDay === null) return 0
-  return (((lastValueOfDay.value - firstValueOfDay.value) / firstValueOfDay.value) * 100).toFixed(2)
+  try {
+    const firstValueOfDay = await getFirtsSpyValue()
+    const lastValueOfDay = await getLastSpyValue()
+
+    if (lastValueOfDay === null || firstValueOfDay === null) return 0
+
+    let parsedLastValue = Number(lastValueOfDay.value)
+    let parsedFirstValue = Number(firstValueOfDay.value)
+    return parseFloat((((parsedLastValue - parsedFirstValue) / parsedFirstValue) * 100).toFixed(2))
+  } catch {
+    return 0
+  }
 }
 
-export const generateDailyPorcentualForAscOrDescPrice = async () => {
-  const variation = await getVariationSPY()
-  const { value } = await getLastSpyValue()
-  if (variation > 0) {
-    return `El valor del cedear SPY500 subio un ${variation} % y cerro con un valor del ${moneyParse(value)} ARS`
-  } else if (variation == 0.0) {
-    return `El valor del cedear SPY500 mantuvo su valor y cerro con un valor del ${moneyParse(value)} ARS`
-  } else {
-    return `El valor del cedear SPY500 descendio un ${variation * -1} % y cerro con un valor del ${moneyParse(
-      value
-    )} ARS`
+export const generateDailyPorcentualForAscOrDescPrice = async (): Promise<string> => {
+  try {
+    const variation = await getVariationSPY()
+    const { value } = await getLastSpyValue()
+    if (variation > 0) {
+      return `El valor del cedear SPY500 subio un ${variation} % y cerro con un valor del ${moneyParse(value)} ARS`
+    } else if (variation == 0.0) {
+      return `El valor del cedear SPY500 mantuvo su valor y cerro con un valor del ${moneyParse(value)} ARS`
+    } else {
+      return `El valor del cedear SPY500 descendio un ${variation * -1} % y cerro con un valor del ${moneyParse(
+        value
+      )} ARS`
+    }
+  } catch {
+    return 'No se pudo calcular la variación'
   }
 }
